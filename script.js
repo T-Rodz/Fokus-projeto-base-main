@@ -6,6 +6,7 @@ const banner = document.querySelector ('.app__image')
 const botaoImagem = document.querySelector('.app__card-primary-butto-icon')
 const imagemPausar = ('/imagens/pause.png')
 const imagemComecar = ('/imagens/play_arrow.png')
+const TempoNaTela = document.querySelector ('#timer')
 const titulo = document.querySelector ('.app__title')
 const botoes = document.querySelectorAll ('.app__card-button')
 const startPauseBt = document.querySelector ('#start-pause')
@@ -17,7 +18,7 @@ const AudioPause = new Audio('/sons/pause.mp3')
 const AudioTempoFinalizado = new Audio('/sons/beep.mp3')
 musica.loop = true
 
-let tempoDecorridoEmSegundos = 5
+let tempoDecorridoEmSegundos = 1500
 let intervaloId = null
 
 musicaFocoInput.addEventListener('change', () => {
@@ -84,7 +85,7 @@ const contagemRegressiva = () => {
         return
     }
     tempoDecorridoEmSegundos -= 1
-    console.log('Temporizador: ' + tempoDecorridoEmSegundos)
+    mostrarTempo()
 }
 
 startPauseBt.addEventListener('click', iniciarOuPausar, AudioPlay.play)
@@ -107,3 +108,10 @@ function zerar() {
     botaoImagem.setAttribute('src', imagemComecar)
     intervaloId = null
 }
+
+function mostrarTempo() {
+    const tempo = tempoDecorridoEmSegundos
+    TempoNaTela.innerHTML = `${tempo}`
+}
+
+mostrarTempo()
